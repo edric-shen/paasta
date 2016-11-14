@@ -131,8 +131,8 @@ def describe_instances(instance_ids, region=None, instance_filters=None):
             return None
         else:
             raise
-    instances = []
-    [instances.extend(reservation['Instances']) for reservation in instance_descriptions['Reservations']]
+    instance_reservations = [reservation['Instances'] for reservation in instance_descriptions['Reservations']]
+    instances = [instance for reservation in instance_reservations for instance in reservation]
     return instances
 
 
